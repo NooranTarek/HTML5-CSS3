@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Range</title>
+    <style>
+      body {
+        background-image: url("https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjk5Ni0wMDlfMS1rcm9pcjRkay5qcGc.jpg");
+      }
+      progress{
+            appearance: none;
+        }
+        progress::-webkit-progress-bar{
+            background-color: antiquewhite;
+            box-shadow: 0 0 3px red inset;
+        }
+        progress::-webkit-progress-value{
+            background-color: darkgoldenrod;
+        }
+    </style>
+  </head>
+  <body>
+    <label>Numeric Input:</label>
+    <input
+      type="number"
+      id="numericInput"
+      min="0"
+      max="9"
+      oninput="updateRangeValue()"
+    />
+    <br />
+    <label>Range Input:</label>
+    <input
+      type="range"
+      id="rangeInput"
+      min="0"
+      max="9"
+      oninput="updateNumericValue()"
+    />
+    
+    <!--**************************************************************************-->
+    <script>
+      const numericInput = document.getElementById("numericInput");
+      const rangeInput = document.getElementById("rangeInput");
+
+      function updateRangeValue() {
+        const value = Math.min(9, Math.max(0, numericInput.value));
+        rangeInput.value = value;
+      }
+
+      function updateNumericValue() {
+        numericInput.value = rangeInput.value;
+      }
+
+    </script>
+  </body>
+</html>

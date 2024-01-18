@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Color</title>
+    <style>
+      body {
+        background-image: url("https://4kwallpapers.com/images/wallpapers/color-burst-colorful-explosion-cgi-cosmic-black-background-1920x1080-6652.jpg");
+        font-family: "Arial";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .range {
+        margin-right: 20px;
+      }
+
+      p {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <label>Red:</label>
+    <input
+      class="range"
+      type="range"
+      id="redRange"
+      min="0"
+      max="255"
+      value="0"
+      oninput="updateTextColor()"
+    />
+    <br />
+    <label for="greenRange">Green:</label>
+    <input
+      class="range"
+      type="range"
+      id="greenRange"
+      min="0"
+      max="255"
+      value="0"
+      oninput="updateTextColor()"
+    />
+    <br />
+    <label for="blueRange">Blue:</label>
+    <input
+      class="range"
+      type="range"
+      id="blueRange"
+      min="0"
+      max="255"
+      value="0"
+      oninput="updateTextColor()"
+    />
+    <br />
+    <p id="name">Nouran Tarek Mohamed</p>
+
+    <script>
+      function updateTextColor() {
+        const redValue = document.getElementById("redRange").value;
+        const greenValue = document.getElementById("greenRange").value;
+        const blueValue = document.getElementById("blueRange").value;
+
+        const name = document.getElementById("name");
+        const colorValue = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+        name.style.color = colorValue;
+      }
+    </script>
+  </body>
+</html>
