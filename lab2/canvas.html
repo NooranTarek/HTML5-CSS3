@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker</title>
+    <style>
+        canvas {
+            background-image: url(img2.jpg);
+        }
+        input{
+            margin-top: 50px;
+            margin-left: 300px;
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="700" height="380"></canvas>
+    <br>
+    <input type="color" id="colorPicker" value="#ff0000">
+    <script>
+        var canvas = document.querySelector('canvas');
+        var ctx = canvas.getContext('2d');
+        var colorPicker = document.getElementById('colorPicker');
+
+        colorPicker.addEventListener('input', function () {
+            draw100Circles(colorPicker.value);
+        });
+
+        function drawCircle(x, y, radius, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+        function draw100Circles(color) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < 100; i++) {
+                var x = Math.floor(Math.random() * canvas.width);
+                var y = Math.floor(Math.random() * canvas.height);
+                var radius = 30;
+                drawCircle(x, y, radius, color);
+            }
+        }
+        draw100Circles(colorPicker.value);
+    </script>
+</body>
+
+</html>

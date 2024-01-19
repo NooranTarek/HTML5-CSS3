@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Map</title>
+    <style>
+      body {
+        background-image: url(map.jpg);
+      }
+      #map {
+        height: 400px;
+        width: 400px;
+      }
+
+      table {
+        display: none;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      td {
+        background-color: #2e2500;
+        color: white;
+      }
+      th {
+        background-color: #fdeb98;
+      }
+      button {
+        width: 200px;
+        height: 50px;
+        color: rgb(255, 217, 121);
+        background-color: rgb(85, 61, 0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="getMap">Show Map</button>
+    <button id="getLocationInfo">Show Location Info</button>
+
+    <table id="locationTable">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="map"></div>
+
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
+        v: "weekly",
+      });
+
+      let btnMap = document.getElementById("getMap");
+      btnMap.addEventListener("click", function () {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(sucess, error);
+        } else {
+          alert("Update your browser to use geolocation");
+        }
+      });
+
+      var locationTable = document.getElementById("locationTable");
+
+      getLocationInfo.addEventListener("click", function () {
+        locationTable.style.display = "table";
+        document.getElementById("map").style.display = "none"; // Hide the map
+      });
+
+      function sucess(obj) {
+        var lat = obj.coords.latitude;
+        var lon = obj.coords.longitude;
+        var timestamp = new Date(obj.timestamp).toLocaleString();
+        console.log(lat);
+        console.log(lon);
+        initMap(lat, lon);
+        addLocationToTable(timestamp, lat, lon);
+      }
+
+      function error(e) {
+        switch (e.code) {
+          case 1:
+            console.log("error user denied");
+            break;
+        }
+      }
+
+      let map;
+
+      async function initMap(x, y) {
+        const { Map } = await google.maps.importLibrary("maps");
+
+        map = new Map(document.getElementById("map"), {
+          center: {
+            lat: x,
+            lng: y,
+          },
+          zoom: 15,
+        });
+
+        document.getElementById("map").style.display = "block"; // Show the map
+      }
+
+      function addLocationToTable(timestamp, lat, lon) {
+        var tbody = locationTable.querySelector("tbody");
+        var row = tbody.insertRow(0);
+        var cellTimestamp = row.insertCell(0);
+        var cellLatitude = row.insertCell(1);
+        var cellLongitude = row.insertCell(2);
+
+        cellTimestamp.textContent = timestamp;
+        cellLatitude.textContent = lat;
+        cellLongitude.textContent = lon;
+      }
+    </script>
+  </body>
+</html>
