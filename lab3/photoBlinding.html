@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="photoBlinding.css" />
+    <title>Layered Animation</title>
+  </head>
+  <body>
+    <div id="scene" >
+      <button onclick="applyFilter('invert(1)')">invert</button>
+      <button onclick="applyFilter('sepia(1)')">Sepia</button>
+      <button onclick="applyFilter('grayscale(1)')">Grayscale</button>
+    </div>
+
+    <script>
+      function applyFilter(filter) {
+        document.getElementById("scene").style.filter = filter;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="ball.css">
+  <title>Ball</title>
+</head>
+<body>
+  <div class="field">
+    <div class="player" id="player1"></div>
+    <div class="player" id="player2"></div>
+    <div class="ball" id="ball"></div>
+  </div>
+  <button onclick="passBall()">Pass Ball</button>
+  <script>
+    function passBall() {
+      const ball = document.getElementById("ball");
+
+      ball.style.transform =
+        "translateX(1000px) translateY(-20px) rotate(180deg)";
+
+      setTimeout(() => {
+        ball.style.transform = "translateX(0) translateY(0) rotate(0)";
+      }, 500);
+    }
+  </script>
+</body>
+</html>

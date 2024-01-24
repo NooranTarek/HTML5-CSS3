@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .field {
+    width: 1400px;
+    height: 100px;
+    position: relative;
+    background-image: url('grass.jpg');
+    background-size: cover;
+    box-sizing: border-box;
+  }
+  
+  .player,
+  .ball {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease;
+  }
+  
+  #player1 {
+    background-image: url('player.jpg');
+    left: 70px;
+    width: 100px;
+    height: 200px;
+    margin-top: -60px;
+  }
+  
+  #player2 {
+    background-image: url('player2.jpg');
+    right: 70px;
+    width: 100px;
+    height: 200px;
+    margin-top: -60px;
+  }
+  
+  #ball {
+    background-image: url('ball.jpg');
+    top: 75px;
+    left: 175px;
+  }
+  
+  button {
+    width: 100px;
+    height: 40px;
+    margin-top: 20px;
+  }
+  
